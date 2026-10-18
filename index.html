@@ -35,6 +35,20 @@ body {
   overflow-y: auto;
 }
 
+/* LOCK THE WEBSITE UNTIL START IS PRESSED */
+
+body.page-locked {
+  overflow: hidden;
+  height: 100vh;
+  height: 100svh;
+  overscroll-behavior: none;
+}
+
+body.page-locked > section:not(.hero),
+body.page-locked > footer {
+  display: none !important;
+}
+
 .floaty {
   position: fixed;
   bottom: -45px;
@@ -71,6 +85,13 @@ body {
     radial-gradient(circle at 15% 20%, #cfe6ff 0%, transparent 31%),
     radial-gradient(circle at 85% 28%, #dceeff 0%, transparent 32%),
     linear-gradient(135deg, #f8fcff, #e6f2ff);
+}
+
+body.page-locked .hero {
+  height: 100vh;
+  height: 100svh;
+  min-height: 100vh;
+  min-height: 100svh;
 }
 
 .hero-content {
@@ -243,15 +264,11 @@ section {
   transform: translateY(0);
 }
 
-/* Keep the hover effect and activate it while scrolling */
-
 .photo:hover,
 .photo.scroll-active {
   transform: translateY(-5px);
   box-shadow: 0 16px 30px rgba(40,70,110,.17);
 }
-
-/* Preserve each image's original aspect ratio */
 
 .photo img {
   display: block;
@@ -329,7 +346,7 @@ section {
   font-size: 14px;
 }
 
-/* Phone layout */
+/* PHONE LAYOUT */
 
 @media (max-width: 600px) {
   section {
@@ -375,8 +392,6 @@ section {
   .message-space {
     min-height: 300px;
   }
-
-  /* One photo per row on phones, without square cropping */
 
   .gallery {
     grid-template-columns: minmax(0, 1fr);
@@ -425,7 +440,7 @@ section {
 </style>
 </head>
 
-<body>
+<body class="page-locked">
 
 <section class="hero">
   <div class="hero-content">
@@ -450,13 +465,13 @@ section {
   <h2 class="section-title">Little Memories 📸</h2>
   <p class="section-subtitle">A few moments worth keeping ✨</p>
 
-<div class="gallery">
-  <div class="photo"><img src="./KRITIKA/i1.jpg" alt="Memory 1"></div>
-  <div class="photo"><img src="./KRITIKA/i2.jpg" alt="Memory 2"></div>
-  <div class="photo"><img src="./KRITIKA/i3.jpg" alt="Memory 3"></div>
-  <div class="photo"><img src="./KRITIKA/i4.jpg" alt="Memory 4"></div>
-  <div class="photo"><img src="./KRITIKA/i5.jpg" alt="Memory 5"></div>
-</div>
+  <div class="gallery">
+    <div class="photo"><img src="./KRITIKA/i1.jpg" alt="Memory 1"></div>
+    <div class="photo"><img src="./KRITIKA/i2.jpg" alt="Memory 2"></div>
+    <div class="photo"><img src="./KRITIKA/i3.jpg" alt="Memory 3"></div>
+    <div class="photo"><img src="./KRITIKA/i4.jpg" alt="Memory 4"></div>
+    <div class="photo"><img src="./KRITIKA/i5.jpg" alt="Memory 5"></div>
+  </div>
 </section>
 
 <section class="surprise-section">
@@ -488,14 +503,20 @@ section {
 function unlockPage(event) {
   event.preventDefault();
 
+  document.body.classList.remove("page-locked");
+
   document.getElementById("message").scrollIntoView({
     behavior: "smooth"
   });
 }
 
 function openSurprise() {
-  document.getElementById("surprise").classList.add("show");
-  createConfetti();
+  const surprise = document.getElementById("surprise");
+
+  if (!surprise.classList.contains("show")) {
+    surprise.classList.add("show");
+    createConfetti();
+  }
 }
 
 function createFloaty() {
@@ -546,7 +567,7 @@ function createConfetti() {
   }
 }
 
-/* Automatically apply the photo hover effect while scrolling */
+/* Activate photo hover effect while scrolling */
 
 const photoObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
