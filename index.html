@@ -35,7 +35,7 @@ body {
   overflow-y: auto;
 }
 
-/* INITIAL PAGE LOCK */
+/* LOCK UNTIL START BUTTON IS PRESSED */
 
 body.page-locked {
   overflow: hidden;
@@ -48,6 +48,8 @@ body.page-locked > section:not(.hero),
 body.page-locked > footer {
   display: none !important;
 }
+
+/* FLOATING EMOJIS */
 
 .floaty {
   position: fixed;
@@ -72,7 +74,7 @@ body.page-locked > footer {
   }
 }
 
-/* HERO */
+/* OPENING SCREEN */
 
 .hero {
   min-height: 100vh;
@@ -181,7 +183,7 @@ body.page-locked .hero {
   background: var(--blue-dark);
 }
 
-/* COMMON SECTIONS */
+/* GENERAL SECTIONS */
 
 section {
   padding: 78px 20px;
@@ -203,7 +205,7 @@ section {
   line-height: 1.6;
 }
 
-/* MESSAGE */
+/* BIRTHDAY MESSAGE */
 
 .message-section {
   background: white;
@@ -245,60 +247,58 @@ section {
   color: var(--blue-dark);
 }
 
-/* SCATTERED 3D PHOTO GALLERY */
+/* LONG CINEMATIC PHOTO GALLERY */
 
 .gallery-section {
   position: relative;
-  overflow: hidden;
+  overflow: clip;
   background:
-    radial-gradient(ellipse at 50% 45%, #e2efff 0%, transparent 70%),
-    linear-gradient(135deg, #f3f8ff, #eaf3ff);
-}
-
-.gallery-section .section-title {
-  margin-bottom: 14px;
+    radial-gradient(ellipse at 50% 30%, #e2efff 0%, transparent 70%),
+    linear-gradient(180deg, #f3f8ff, #eaf3ff);
+  padding-top: 90px;
+  padding-bottom: 100px;
 }
 
 .gallery-section .section-subtitle {
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 
-.gallery-stage {
-  position: relative;
+.gallery-story {
   width: 100%;
-  max-width: 1100px;
-  height: 680px;
+  max-width: 1000px;
   margin: 0 auto;
-  perspective: 1200px;
-  isolation: isolate;
 }
 
-/* Each photo is positioned independently */
+.gallery-item {
+  min-height: 90vh;
+  min-height: 90svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 20px;
+  perspective: 1200px;
+}
+
+/* PHOTO CARDS */
 
 .photo {
-  position: absolute;
-  width: 26%;
-  padding: 8px;
-  border-radius: 12px;
+  width: min(75%, 530px);
+  padding: 10px;
+  border-radius: 18px;
   background: rgba(255,255,255,.94);
-  border: 1px solid rgba(255,255,255,.95);
-  box-shadow:
-    0 12px 30px rgba(35,79,131,.13),
-    0 3px 8px rgba(35,79,131,.07);
-  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.9);
+  box-shadow: 0 18px 45px rgba(35,79,131,.14);
+
   opacity: 0;
-  transform:
-    translate3d(var(--start-x, 0), 55px, 0)
-    rotate(var(--rotation, 0deg))
-    scale(.82);
-  transform-origin: center center;
+  transform: translateY(90px) scale(.88) rotateX(7deg);
+
   transition:
-    transform .9s cubic-bezier(.2,.75,.25,1),
-    opacity .7s ease,
-    box-shadow .35s ease;
-  transition-delay: var(--delay, 0ms);
-  will-change: transform, opacity;
-  z-index: var(--layer, 1);
+    opacity .9s ease,
+    transform 1s cubic-bezier(.2,.7,.2,1),
+    box-shadow .4s ease;
+
+  will-change: opacity, transform;
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -306,87 +306,122 @@ section {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 7px;
+  max-width: 100%;
+  border-radius: 10px;
   object-fit: contain;
 }
 
-/* Scattered positions */
+/* REVEAL ONE PHOTO AT A TIME */
 
-.photo:nth-child(1) {
-  top: 8%;
-  left: 9%;
-  --rotation: -9deg;
-  --start-x: -55px;
-  --delay: 100ms;
-  --layer: 2;
-}
-
-.photo:nth-child(2) {
-  top: 3%;
-  left: 35%;
-  width: 28%;
-  --rotation: 10deg;
-  --start-x: 0px;
-  --delay: 220ms;
-  --layer: 4;
-}
-
-.photo:nth-child(3) {
-  top: 15%;
-  right: 7%;
-  --rotation: 8deg;
-  --start-x: 55px;
-  --delay: 340ms;
-  --layer: 3;
-}
-
-.photo:nth-child(4) {
-  bottom: 8%;
-  left: 20%;
-  width: 25%;
-  --rotation: 7deg;
-  --start-x: -35px;
-  --delay: 460ms;
-  --layer: 5;
-}
-
-.photo:nth-child(5) {
-  bottom: 7%;
-  right: 15%;
-  width: 29%;
-  --rotation: -8deg;
-  --start-x: 45px;
-  --delay: 580ms;
-  --layer: 6;
-}
-
-/* Animate cards into their scattered positions */
-
-.gallery-stage.gallery-visible .photo {
+.gallery-item.is-visible .photo {
   opacity: 1;
-  transform:
-    translate3d(0, 0, 0)
-    rotate(var(--rotation))
-    scale(1);
+  transform: translateY(0) scale(1) rotateX(0);
 }
 
-/* PC hover effect */
+/* CAPTIONS */
+
+.photo-caption {
+  margin-top: 24px;
+  color: var(--blue-dark);
+  font-family: Georgia, serif;
+  font-size: clamp(17px, 2.5vw, 22px);
+  text-align: center;
+
+  opacity: 0;
+  transform: translateY(15px);
+
+  transition:
+    opacity .8s ease .2s,
+    transform .8s ease .2s;
+}
+
+.gallery-item.is-visible .photo-caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* DESKTOP HOVER */
 
 @media (hover: hover) and (pointer: fine) {
-  .photo:hover {
-    transform:
-      translate3d(0, -12px, 40px)
-      rotate(0deg)
-      scale(1.07);
-    box-shadow:
-      0 26px 48px rgba(35,79,131,.23),
-      0 8px 18px rgba(35,79,131,.10);
-    z-index: 20;
-    transition-delay: 0ms;
+  .gallery-item.is-visible .photo:hover {
+    transform: translateY(-8px) scale(1.025) rotateZ(-1deg);
+    box-shadow: 0 28px 55px rgba(35,79,131,.22);
   }
 }
 
-/* Phone gallery */
+/* GIFT SECTION */
+
+.surprise-section {
+  text-align: center;
+  background:
+    radial-gradient(circle at 10% 20%, #d9ebff, transparent 30%),
+    radial-gradient(circle at 90% 80%, #e7f3ff, transparent 30%),
+    white;
+}
+
+.surprise-box {
+  max-width: 720px;
+  margin: auto;
+}
+
+.gift {
+  font-size: 90px;
+  display: inline-block;
+  cursor: pointer;
+  transition: .3s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.gift:hover {
+  transform: scale(1.08) rotate(-4deg);
+}
+
+.hidden-message {
+  display: none;
+  margin-top: 28px;
+  padding: 30px;
+  background: white;
+  border: 1px solid #e1efff;
+  border-radius: 22px;
+  box-shadow: 0 12px 32px rgba(40,70,110,.10);
+  font-size: 18px;
+  line-height: 1.8;
+  animation: appear .6s ease;
+}
+
+.hidden-message.show {
+  display: block;
+}
+
+/* CLOSING SECTION */
+
+.final-section {
+  text-align: center;
+  background: linear-gradient(135deg, #e6f2ff, #f8fcff);
+  padding: 95px 20px;
+}
+
+.final-section h2 {
+  font-family: Georgia, serif;
+  font-size: clamp(35px, 7vw, 66px);
+  color: var(--blue-dark);
+  margin-bottom: 20px;
+}
+
+.final-section p {
+  font-size: clamp(17px, 2.5vw, 19px);
+  color: var(--muted);
+}
+
+.footer {
+  text-align: center;
+  padding: 24px;
+  background: #203750;
+  color: #e5f1ff;
+  font-size: 14px;
+}
+
+/* MOBILE LAYOUT */
 
 @media (max-width: 600px) {
   section {
@@ -434,68 +469,28 @@ section {
   }
 
   .gallery-section {
-    padding-left: 12px;
-    padding-right: 12px;
+    padding: 65px 12px 75px;
   }
 
-  .gallery-stage {
-    height: 610px;
-    max-width: 440px;
+  .gallery-item {
+    min-height: 78svh;
+    padding: 35px 8px;
   }
 
   .photo {
-    width: 45%;
-    padding: 5px;
-    border-radius: 10px;
+    width: min(94%, 430px);
+    padding: 6px;
+    border-radius: 14px;
+    transform: translateY(65px) scale(.92);
   }
 
   .photo img {
-    border-radius: 6px;
+    border-radius: 9px;
   }
 
-  .photo:nth-child(1) {
-    top: 5%;
-    left: 3%;
-    width: 47%;
-    --rotation: -8deg;
-    --start-x: -30px;
-    --delay: 100ms;
-  }
-
-  .photo:nth-child(2) {
-    top: 1%;
-    left: 48%;
-    width: 46%;
-    --rotation: 8deg;
-    --start-x: 30px;
-    --delay: 220ms;
-  }
-
-  .photo:nth-child(3) {
-    top: 34%;
-    right: 2%;
-    width: 48%;
-    --rotation: 7deg;
-    --start-x: 35px;
-    --delay: 340ms;
-  }
-
-  .photo:nth-child(4) {
-    bottom: 4%;
-    left: 4%;
-    width: 46%;
-    --rotation: 8deg;
-    --start-x: -30px;
-    --delay: 460ms;
-  }
-
-  .photo:nth-child(5) {
-    bottom: 7%;
-    right: 6%;
-    width: 47%;
-    --rotation: -8deg;
-    --start-x: 30px;
-    --delay: 580ms;
+  .photo-caption {
+    margin-top: 20px;
+    font-size: 18px;
   }
 
   .gift {
@@ -518,82 +513,6 @@ section {
   .hero h1 {
     font-size: 39px;
   }
-
-  .gallery-stage {
-    height: 540px;
-  }
-}
-
-/* GIFT SURPRISE */
-
-.surprise-section {
-  text-align: center;
-  background:
-    radial-gradient(circle at 10% 20%, #d9ebff, transparent 30%),
-    radial-gradient(circle at 90% 80%, #e7f3ff, transparent 30%),
-    white;
-}
-
-.surprise-box {
-  max-width: 720px;
-  margin: auto;
-}
-
-.gift {
-  font-size: 90px;
-  display: inline-block;
-  cursor: pointer;
-  transition: .3s;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.gift:hover {
-  transform: scale(1.08) rotate(-4deg);
-}
-
-.hidden-message {
-  display: none;
-  margin-top: 28px;
-  padding: 30px;
-  background: white;
-  border: 1px solid #e1efff;
-  border-radius: 22px;
-  box-shadow: 0 12px 32px rgba(40,70,110,.10);
-  font-size: 18px;
-  line-height: 1.8;
-  animation: appear .6s ease;
-}
-
-.hidden-message.show {
-  display: block;
-}
-
-/* FINAL SECTION */
-
-.final-section {
-  text-align: center;
-  background: linear-gradient(135deg, #e6f2ff, #f8fcff);
-  padding: 95px 20px;
-}
-
-.final-section h2 {
-  font-family: Georgia, serif;
-  font-size: clamp(35px, 7vw, 66px);
-  color: var(--blue-dark);
-  margin-bottom: 20px;
-}
-
-.final-section p {
-  font-size: clamp(17px, 2.5vw, 19px);
-  color: var(--muted);
-}
-
-.footer {
-  text-align: center;
-  padding: 24px;
-  background: #203750;
-  color: #e5f1ff;
-  font-size: 14px;
 }
 
 /* ACCESSIBILITY */
@@ -607,9 +526,10 @@ section {
     transition-duration: .01ms !important;
   }
 
-  .photo {
+  .photo,
+  .photo-caption {
     opacity: 1;
-    transform: rotate(var(--rotation, 0deg)) !important;
+    transform: none;
   }
 }
 </style>
@@ -617,11 +537,12 @@ section {
 
 <body class="page-locked">
 
-<!-- BIRTHDAY OPENING -->
+<!-- OPENING SCREEN -->
 
 <section class="hero">
   <div class="hero-content">
     <div class="cake">🎂</div>
+
     <div class="eyebrow">A little birthday surprise</div>
 
     <h1>Happy Birthday <span>Her 💙</span></h1>
@@ -637,7 +558,7 @@ section {
   </div>
 </section>
 
-<!-- PERSONAL MESSAGE -->
+<!-- MESSAGE SECTION -->
 
 <section class="message-section" id="message">
   <h2 class="section-title">A Little Message 💌</h2>
@@ -649,38 +570,53 @@ section {
   </div>
 </section>
 
-<!-- 3D SCATTERED PHOTO GALLERY -->
+<!-- LONG SCROLLING PHOTO GALLERY -->
 
 <section class="gallery-section" id="memories">
   <h2 class="section-title">Little Memories 📸</h2>
-  <p class="section-subtitle">A few moments worth keeping ✨</p>
+  <p class="section-subtitle">Every picture holds a little memory ✨</p>
 
-  <div class="gallery-stage">
+  <div class="gallery-story">
 
-    <div class="photo">
-      <img src="./KRITIKA/i1.jpg" alt="Memory 1">
+    <div class="gallery-item">
+      <div class="photo">
+        <img src="./KRITIKA/i1.jpg" alt="Memory 1">
+      </div>
+      <p class="photo-caption">A moment to remember 💙</p>
     </div>
 
-    <div class="photo">
-      <img src="./KRITIKA/i2.jpg" alt="Memory 2">
+    <div class="gallery-item">
+      <div class="photo">
+        <img src="./KRITIKA/i2.jpg" alt="Memory 2">
+      </div>
+      <p class="photo-caption">Little things, lovely memories ✨</p>
     </div>
 
-    <div class="photo">
-      <img src="./KRITIKA/i3.jpg" alt="Memory 3">
+    <div class="gallery-item">
+      <div class="photo">
+        <img src="./KRITIKA/i3.jpg" alt="Memory 3">
+      </div>
+      <p class="photo-caption">A memory worth keeping 🌷</p>
     </div>
 
-    <div class="photo">
-      <img src="./KRITIKA/i4.jpg" alt="Memory 4">
+    <div class="gallery-item">
+      <div class="photo">
+        <img src="./KRITIKA/i4.jpg" alt="Memory 4">
+      </div>
+      <p class="photo-caption">One for the heart 💫</p>
     </div>
 
-    <div class="photo">
-      <img src="./KRITIKA/i5.jpg" alt="Memory 5">
+    <div class="gallery-item">
+      <div class="photo">
+        <img src="./KRITIKA/i5.jpg" alt="Memory 5">
+      </div>
+      <p class="photo-caption">And this one's special 💙</p>
     </div>
 
   </div>
 </section>
 
-<!-- FINAL GIFT -->
+<!-- GIFT SURPRISE -->
 
 <section class="surprise-section">
   <div class="surprise-box">
@@ -722,7 +658,7 @@ section {
   </div>
 </section>
 
-<!-- CLOSING -->
+<!-- FINAL SECTION -->
 
 <section class="final-section">
   <h2>Happy Birthday! 🎂</h2>
@@ -732,7 +668,7 @@ section {
 <footer class="footer">Made with 💙</footer>
 
 <script>
-/* UNLOCK THE WEBSITE */
+/* UNLOCK THE PAGE */
 
 function unlockPage(event) {
   event.preventDefault();
@@ -767,7 +703,7 @@ function createFloaty() {
 
 setInterval(createFloaty, 1000);
 
-/* OPEN THE GIFT */
+/* GIFT SURPRISE */
 
 function openSurprise() {
   const surprise = document.getElementById("surprise");
@@ -809,30 +745,29 @@ function createConfetti() {
         `rotate(${Math.random() * 720}deg)`;
     }, 40);
 
-    setTimeout(() => {
-      piece.remove();
-    }, duration * 1000 + 300);
+    setTimeout(() => piece.remove(), duration * 1000 + 300);
   }
 }
 
-/* SCROLL-TRIGGERED 3D PHOTO ANIMATION */
+/* REVEAL PHOTOS ONE BY ONE WHILE SCROLLING */
 
-const galleryStages = document.querySelectorAll(".gallery-stage");
+const galleryItems = document.querySelectorAll(".gallery-item");
 
 const galleryObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
-      entry.target.classList.add("gallery-visible");
+      entry.target.classList.add("is-visible");
     } else {
-      entry.target.classList.remove("gallery-visible");
+      entry.target.classList.remove("is-visible");
     }
   });
 }, {
-  threshold: 0.12
+  threshold: 0.25,
+  rootMargin: "0px 0px -8% 0px"
 });
 
-galleryStages.forEach((stage) => {
-  galleryObserver.observe(stage);
+galleryItems.forEach((item) => {
+  galleryObserver.observe(item);
 });
 </script>
 
