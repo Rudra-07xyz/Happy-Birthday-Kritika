@@ -4,356 +4,423 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Happy Birthday her 🎂</title>
+<meta name="theme-color" content="#eaf4ff">
+<title>Happy Birthday! 🎂</title>
 
 <style>
+:root {
+  --blue: #3978c5;
+  --blue-dark: #234f83;
+  --blue-light: #e8f3ff;
+  --blue-pale: #f6faff;
+  --ink: #293d54;
+  --muted: #657b94;
+}
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 body {
-    font-family: "Trebuchet MS", Arial, sans-serif;
-    background: #fff5fa;
-    color: #3b2733;
-    overflow-x: hidden;
-    overflow-y: auto;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  color: var(--ink);
+  background: var(--blue-pale);
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
-.heart {
-    position: fixed;
-    bottom: -40px;
-    font-size: 22px;
-    animation: floatHeart linear forwards;
-    pointer-events: none;
-    z-index: 100;
+.floaty {
+  position: fixed;
+  bottom: -45px;
+  pointer-events: none;
+  z-index: 100;
+  animation: floatUp linear forwards;
+  opacity: 0;
 }
 
-@keyframes floatHeart {
-    0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0;
-    }
-
-    15% {
-        opacity: 1;
-    }
-
-    100% {
-        transform: translateY(-110vh) rotate(360deg);
-        opacity: 0;
-    }
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0);
+    opacity: 0;
+  }
+  15% {
+    opacity: .9;
+  }
+  100% {
+    transform: translateY(-115vh) rotate(35deg);
+    opacity: 0;
+  }
 }
 
 .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 30px 20px;
-    position: relative;
-
-    background:
-        radial-gradient(circle at 20% 20%, #ffd6e8 0%, transparent 30%),
-        radial-gradient(circle at 80% 30%, #e7d7ff 0%, transparent 30%),
-        linear-gradient(135deg, #fff0f7, #eee7ff);
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 36px 22px;
+  position: relative;
+  background:
+    radial-gradient(circle at 15% 20%, #cfe6ff 0%, transparent 31%),
+    radial-gradient(circle at 85% 28%, #dceeff 0%, transparent 32%),
+    linear-gradient(135deg, #f8fcff, #e6f2ff);
 }
 
 .hero-content {
-    max-width: 850px;
-    animation: appear 1.5s ease;
-}
-
-.birthday-small {
-    font-size: 20px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #a64d79;
-    margin-bottom: 18px;
-}
-
-.hero h1 {
-    font-family: Georgia, serif;
-    font-size: clamp(48px, 8vw, 88px);
-    line-height: 1;
-    color: #d84d83;
-    text-shadow: 3px 3px 0px #ffffff;
-    margin-bottom: 20px;
-}
-
-.hero h1 span {
-    display: block;
-    color: #7d5ab5;
-}
-
-.hero-text {
-    font-size: 21px;
-    color: #624a58;
-    line-height: 1.7;
-    max-width: 650px;
-    margin: auto;
+  width: 100%;
+  max-width: 850px;
+  animation: appear 1.2s ease;
 }
 
 .cake {
-    font-size: 85px;
-    margin-bottom: 20px;
-    animation: cakeBounce 2s infinite;
+  font-size: clamp(64px, 9vw, 82px);
+  margin-bottom: 20px;
+  animation: bounce 2s infinite;
 }
 
-@keyframes cakeBounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-12px);
-    }
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 @keyframes appear {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.scroll-btn {
-    margin-top: 35px;
-    display: inline-block;
-    padding: 14px 30px;
-    background: #d84d83;
-    color: white;
-    text-decoration: none;
-    border-radius: 50px;
-    font-size: 17px;
-    transition: 0.3s;
-    box-shadow: 0 8px 20px rgba(216, 77, 131, 0.25);
-    cursor: pointer;
+.eyebrow {
+  font-size: clamp(12px, 2vw, 15px);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 18px;
+  font-weight: 700;
 }
 
-.scroll-btn:hover {
-    transform: translateY(-3px);
-    background: #bd396c;
+.hero h1 {
+  font-family: Georgia, serif;
+  font-size: clamp(43px, 8vw, 82px);
+  line-height: 1.08;
+  color: var(--blue-dark);
+  margin-bottom: 22px;
+}
+
+.hero h1 span {
+  display: block;
+  color: var(--blue);
+}
+
+.hero-text {
+  font-size: clamp(16px, 2.4vw, 20px);
+  color: var(--muted);
+  line-height: 1.75;
+  max-width: 640px;
+  margin: auto;
+}
+
+.scroll-btn,
+.surprise-button {
+  display: inline-block;
+  border: 0;
+  margin-top: 30px;
+  padding: 14px 28px;
+  border-radius: 50px;
+  background: var(--blue);
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(57,120,197,.22);
+  transition: .25s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.scroll-btn:hover,
+.surprise-button:hover {
+  transform: translateY(-3px);
+  background: var(--blue-dark);
 }
 
 section {
-    padding: 80px 20px;
+  padding: 78px 20px;
 }
 
 .section-title {
-    text-align: center;
-    font-family: Georgia, serif;
-    font-size: 42px;
-    color: #c94778;
-    margin-bottom: 15px;
+  text-align: center;
+  font-family: Georgia, serif;
+  font-size: clamp(29px, 5vw, 42px);
+  color: var(--blue-dark);
+  margin-bottom: 14px;
 }
 
 .section-subtitle {
-    text-align: center;
-    color: #765d6b;
-    margin-bottom: 45px;
-    font-size: 18px;
+  text-align: center;
+  color: var(--muted);
+  margin-bottom: 42px;
+  font-size: clamp(15px, 2vw, 17px);
+  line-height: 1.6;
 }
 
 .message-section {
-    background: white;
+  background: white;
 }
 
 .message-card {
-    max-width: 750px;
-    margin: auto;
-    background: linear-gradient(135deg, #fff4f8, #f5efff);
-    padding: 45px;
-    border-radius: 25px;
-    box-shadow: 0 15px 40px rgba(80, 40, 70, 0.10);
-    text-align: center;
-    line-height: 1.9;
-    font-size: 18px;
+  max-width: 760px;
+  width: 100%;
+  margin: auto;
+  padding: clamp(24px, 5vw, 42px);
+  background: linear-gradient(135deg, #f3f9ff, #ffffff);
+  border: 1px solid #e1efff;
+  border-radius: 24px;
+  box-shadow: 0 14px 38px rgba(40,80,125,.08);
+  text-align: center;
+  line-height: 1.9;
+  font-size: 17px;
 }
 
-.message-card .hello {
-    font-family: Georgia, serif;
-    font-size: 28px;
-    color: #d84d83;
-    margin-bottom: 20px;
+.message-card p {
+  margin-bottom: 18px;
+}
+
+.hello {
+  font-family: Georgia, serif;
+  font-size: clamp(22px, 4vw, 27px);
+  color: var(--blue);
+  margin-bottom: 22px;
+}
+
+.message-space {
+  min-height: 340px;
 }
 
 .signature {
-    margin-top: 25px;
-    font-family: Georgia, serif;
-    font-size: 23px;
-    color: #7953a5;
+  margin-top: 25px;
+  font-family: Georgia, serif;
+  font-size: 22px;
+  color: var(--blue-dark);
 }
 
 .gallery-section {
-    background: #fff7fb;
+  background: #f3f8ff;
 }
 
 .gallery {
-    max-width: 1050px;
-    margin: auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+  max-width: 1050px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  align-items: start;
 }
 
 .photo {
-    height: 330px;
-    overflow: hidden;
-    border-radius: 20px;
-    background: #eee;
-    box-shadow: 0 10px 25px rgba(70, 40, 60, 0.12);
-    cursor: pointer;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  width: 100%;
+  min-width: 0;
+  height: auto;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #e4edf7;
+  box-shadow: 0 10px 25px rgba(40,70,110,.12);
+  transition: transform .3s ease, box-shadow .3s ease;
+  transform: translateY(0);
 }
 
-.photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.5s ease;
-}
-
-/* Original hover effect + automatic scroll effect */
+/* Keep the hover effect and activate it while scrolling */
 
 .photo:hover,
 .photo.scroll-active {
-    transform: translateY(-8px) rotate(1deg);
-    box-shadow: 0 18px 35px rgba(70, 40, 60, 0.18);
+  transform: translateY(-5px);
+  box-shadow: 0 16px 30px rgba(40,70,110,.17);
 }
 
-.photo:hover img,
-.photo.scroll-active img {
-    transform: scale(1.08);
+/* Preserve each image's original aspect ratio */
+
+.photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
 }
 
 .surprise-section {
-    text-align: center;
-    background:
-        radial-gradient(circle at 10% 20%, #ffd8e8, transparent 30%),
-        radial-gradient(circle at 90% 80%, #dfd0ff, transparent 30%),
-        #fff;
+  text-align: center;
+  background:
+    radial-gradient(circle at 10% 20%, #d9ebff, transparent 30%),
+    radial-gradient(circle at 90% 80%, #e7f3ff, transparent 30%),
+    white;
 }
 
 .surprise-box {
-    max-width: 700px;
-    margin: auto;
+  max-width: 720px;
+  margin: auto;
 }
 
 .gift {
-    font-size: 100px;
-    cursor: pointer;
-    transition: 0.4s;
-    display: inline-block;
+  font-size: 90px;
+  display: inline-block;
+  cursor: pointer;
+  transition: .3s;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .gift:hover {
-    transform: scale(1.1) rotate(-5deg);
-}
-
-.surprise-button {
-    border: none;
-    background: #7d5ab5;
-    color: white;
-    padding: 15px 32px;
-    border-radius: 50px;
-    font-size: 18px;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: 0.3s;
-}
-
-.surprise-button:hover {
-    transform: scale(1.05);
-    background: #67479c;
+  transform: scale(1.08) rotate(-4deg);
 }
 
 .hidden-message {
-    display: none;
-    margin-top: 30px;
-    background: white;
-    padding: 35px;
-    border-radius: 25px;
-    box-shadow: 0 12px 35px rgba(60, 30, 70, 0.12);
-    font-size: 19px;
-    line-height: 1.8;
-    animation: appear 0.8s ease;
+  display: none;
+  margin-top: 28px;
+  padding: 30px;
+  background: white;
+  border: 1px solid #e1efff;
+  border-radius: 22px;
+  box-shadow: 0 12px 32px rgba(40,70,110,.10);
+  font-size: 18px;
+  line-height: 1.8;
+  animation: appear .6s ease;
 }
 
 .hidden-message.show {
-    display: block;
+  display: block;
 }
 
 .final-section {
-    text-align: center;
-    background: linear-gradient(135deg, #f7e8ff, #ffe8f2);
-    padding: 100px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #e6f2ff, #f8fcff);
+  padding: 95px 20px;
 }
 
 .final-section h2 {
-    font-family: Georgia, serif;
-    font-size: clamp(40px, 7vw, 70px);
-    color: #d84d83;
-    margin-bottom: 20px;
+  font-family: Georgia, serif;
+  font-size: clamp(35px, 7vw, 66px);
+  color: var(--blue-dark);
+  margin-bottom: 20px;
 }
 
 .final-section p {
-    font-size: 20px;
-    color: #654e5c;
+  font-size: clamp(17px, 2.5vw, 19px);
+  color: var(--muted);
 }
 
 .footer {
-    text-align: center;
-    padding: 25px;
-    background: #30212b;
-    color: #eadce5;
-    font-size: 14px;
+  text-align: center;
+  padding: 24px;
+  background: #203750;
+  color: #e5f1ff;
+  font-size: 14px;
 }
 
-@media (max-width: 750px) {
-    .gallery {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 14px;
-    }
+/* Phone layout */
 
-    .photo {
-        height: 260px;
-    }
+@media (max-width: 600px) {
+  section {
+    padding: 58px 16px;
+  }
 
-    .message-card {
-        padding: 30px 22px;
-    }
+  .hero {
+    padding: 28px 22px;
+  }
 
-    .hero-text {
-        font-size: 18px;
-    }
+  .hero h1 {
+    font-size: clamp(40px, 11vw, 58px);
+  }
+
+  .cake {
+    margin-bottom: 17px;
+  }
+
+  .eyebrow {
+    letter-spacing: 2px;
+  }
+
+  .hero-text {
+    line-height: 1.65;
+  }
+
+  .scroll-btn,
+  .surprise-button {
+    padding: 14px 24px;
+    font-size: 15px;
+  }
+
+  .section-subtitle {
+    margin-bottom: 30px;
+  }
+
+  .message-card {
+    padding: 25px 19px;
+    border-radius: 20px;
+    font-size: 16px;
+  }
+
+  .message-space {
+    min-height: 300px;
+  }
+
+  /* One photo per row on phones, without square cropping */
+
+  .gallery {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  .photo {
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+  }
+
+  .photo img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .gift {
+    font-size: 78px;
+  }
+
+  .hidden-message {
+    padding: 24px 19px;
+    font-size: 16px;
+  }
+
+  .final-section {
+    padding: 72px 18px;
+  }
 }
 
-@media (max-width: 500px) {
-    .gallery {
-        grid-template-columns: 1fr;
-    }
+@media (max-width: 360px) {
+  .hero h1 {
+    font-size: 39px;
+  }
+}
 
-    .photo {
-        height: 380px;
-    }
-
-    section {
-        padding: 65px 15px;
-    }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
 }
 </style>
 </head>
@@ -361,274 +428,138 @@ section {
 <body>
 
 <section class="hero">
-    <div class="hero-content">
-
-        <div class="cake">🎂</div>
-
-        <div class="birthday-small">
-            A little birthday surprise
-        </div>
-
-        <h1>
-            Happy Birthday
-            <span>her! 💖</span>
-        </h1>
-
-        <p class="hero-text">
-            Today is your special day, so here's a little
-            corner of the internet made especially for you. 🌸
-        </p>
-
-        <a href="#message" class="scroll-btn" onclick="unlockPage(event)">
-            Start the Surprise ✨
-        </a>
-
-    </div>
+  <div class="hero-content">
+    <div class="cake">🎂</div>
+    <div class="eyebrow">A little birthday surprise</div>
+    <h1>Happy Birthday <span>Her 💙</span></h1>
+    <p class="hero-text">A little corner of the internet, made just to celebrate you. Hope your day is full of smiles, fun, and lovely memories. ✨</p>
+    <a href="#message" class="scroll-btn" onclick="unlockPage(event)">Start the Surprise ✨</a>
+  </div>
 </section>
 
 <section class="message-section" id="message">
-
-    <h2 class="section-title">
-        A Little Message 💌
-    </h2>
-
-    <p class="section-subtitle">
-        From Rudra
-    </p>
-
-    <div class="message-card">
-
-        <div class="hello">
-            Dear her,
-        </div>
-
-        <p>
-            Happy Birthday! 🎂✨
-        </p>
-
-        <br>
-
-        <p>
-            I hope this day brings you lots of happiness,
-            laughter and beautiful memories.
-            You deserve all the good things that life
-            has to offer.
-        </p>
-
-        <br>
-
-        <p>
-            Keep smiling, keep shining and keep being
-            the amazing person you are. 🌸
-        </p>
-
-        <br>
-
-        <p>
-            May this new year of your life be filled with
-            happiness, success, adventures and countless
-            reasons to smile.
-        </p>
-
-        <div class="signature">
-            With lots of wishes,<br>
-            Rudra ❤️
-        </div>
-
-    </div>
+  <h2 class="section-title">A Little Message 💌</h2>
+  <p class="section-subtitle">A birthday note, just for you</p>
+  <div class="message-card">
+    <div class="hello">Happyyy Birthday! 🎂🥳</div>
+    <div class="message-space" aria-label="Space to write your personal birthday message"></div>
+  </div>
 </section>
 
 <section class="gallery-section">
+  <h2 class="section-title">Little Memories 📸</h2>
+  <p class="section-subtitle">A few moments worth keeping ✨</p>
 
-    <h2 class="section-title">
-        Little Memories 📸
-    </h2>
-
-    <p class="section-subtitle">
-        Some moments worth remembering 💕
-    </p>
-
-    <div class="gallery">
-
-        <div class="photo">
-            <img src="./KRITIKA/i1.jpg" alt="her photo 1">
-        </div>
-
-        <div class="photo">
-            <img src="./KRITIKA/i2.jpg" alt="her photo 2">
-        </div>
-
-        <div class="photo">
-            <img src="./KRITIKA/i3.jpg" alt="her photo 3">
-        </div>
-
-        <div class="photo">
-            <img src="./KRITIKA/i4.jpg" alt="her photo 4">
-        </div>
-
-        <div class="photo">
-            <img src="./KRITIKA/i5.jpg" alt="her photo 5">
-        </div>
-
-    </div>
+  <div class="gallery">
+    <div class="photo"><img src="Images/i1.jpeg" alt="Memory 1"></div>
+    <div class="photo"><img src="Images/i2.jpeg" alt="Memory 2"></div>
+    <div class="photo"><img src="Images/i3.jpeg" alt="Memory 3"></div>
+    <div class="photo"><img src="Images/i4.jpeg" alt="Memory 4"></div>
+  </div>
 </section>
 
 <section class="surprise-section">
+  <div class="surprise-box">
+    <h2 class="section-title">One More Thing… 🎁</h2>
+    <p class="section-subtitle">There's one last little surprise waiting for you.</p>
 
-    <div class="surprise-box">
+    <div class="gift" onclick="openSurprise()" aria-label="Open the gift" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openSurprise();}">🎁</div>
+    <br>
 
-        <h2 class="section-title">
-            One More Thing... 🎁
-        </h2>
+    <button class="surprise-button" onclick="openSurprise()">Open Your Gift 💙</button>
 
-        <p class="section-subtitle">
-            There's a little surprise waiting for you.
-        </p>
-
-        <div class="gift">
-            🎁
-        </div>
-
-        <br>
-
-        <button class="surprise-button" onclick="openSurprise()">
-            Open Your Gift 💝
-        </button>
-
-        <div id="surprise" class="hidden-message">
-
-            <p>
-                🎉 SURPRISE! 🎉
-            </p>
-
-            <br>
-
-            <p>
-                May your birthday be as wonderful,
-                bright and beautiful as you are. 💖
-            </p>
-
-            <br>
-
-            <p>
-                Here's to another year of amazing
-                memories, laughter and happiness! 🥳
-            </p>
-
-        </div>
-
+    <div id="surprise" class="hidden-message">
+      <p><strong>🎉 SURPRISE! 🎉</strong></p>
+      <p>Hope this little surprise makes you smile. Wishing you a year full of happiness, new adventures, good people, and beautiful memories. Keep being your wonderful self. 💙</p>
+      <p>Now go enjoy your day! 🥳</p>
     </div>
+  </div>
 </section>
 
 <section class="final-section">
-
-    <h2>
-        Happy Birthday, her! 🎂
-    </h2>
-
-    <p>
-        Have the most amazing day! 🌸✨
-    </p>
-
+  <h2>Happy Birthday! 🎂</h2>
+  <p>Wishing you the loveliest year ahead. 💙✨</p>
 </section>
 
-<div class="footer">
-    Made with ❤️ by Rudra
-</div>
+<footer class="footer">Made with 💙</footer>
 
 <script>
 function unlockPage(event) {
-    event.preventDefault();
+  event.preventDefault();
 
-    document.getElementById("message").scrollIntoView({
-        behavior: "smooth"
-    });
+  document.getElementById("message").scrollIntoView({
+    behavior: "smooth"
+  });
 }
 
 function openSurprise() {
-    const surprise = document.getElementById("surprise");
-
-    surprise.classList.add("show");
-    createConfetti();
+  document.getElementById("surprise").classList.add("show");
+  createConfetti();
 }
 
-function createHeart() {
-    const heart = document.createElement("div");
+function createFloaty() {
+  const item = document.createElement("div");
+  item.className = "floaty";
 
-    heart.className = "heart";
+  const symbols = ["💙", "✨", "☁️", "⭐", "🫧"];
 
-    const symbols = ["💖", "💕", "🌸", "✨", "💗"];
+  item.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+  item.style.left = Math.random() * 100 + "vw";
+  item.style.animationDuration = (6 + Math.random() * 5) + "s";
+  item.style.fontSize = (15 + Math.random() * 18) + "px";
 
-    heart.innerHTML =
-        symbols[Math.floor(Math.random() * symbols.length)];
+  document.body.appendChild(item);
 
-    heart.style.left = Math.random() * 100 + "vw";
-
-    heart.style.animationDuration =
-        (5 + Math.random() * 5) + "s";
-
-    heart.style.fontSize =
-        (15 + Math.random() * 20) + "px";
-
-    document.body.appendChild(heart);
-
-    setTimeout(() => {
-        heart.remove();
-    }, 10000);
+  setTimeout(() => item.remove(), 11500);
 }
 
-setInterval(createHeart, 900);
+setInterval(createFloaty, 1000);
 
 function createConfetti() {
-    const pieces = ["🎉", "✨", "💖", "🎊", "🌸"];
+  const pieces = ["🎉", "✨", "💙", "🎊", "⭐", "🫧"];
 
-    for (let i = 0; i < 35; i++) {
-        const confetti = document.createElement("div");
+  for (let i = 0; i < 36; i++) {
+    const piece = document.createElement("div");
 
-        confetti.innerHTML =
-            pieces[Math.floor(Math.random() * pieces.length)];
+    piece.textContent = pieces[Math.floor(Math.random() * pieces.length)];
+    piece.style.position = "fixed";
+    piece.style.left = Math.random() * 100 + "vw";
+    piece.style.top = "-35px";
+    piece.style.fontSize = "24px";
+    piece.style.zIndex = "999";
+    piece.style.pointerEvents = "none";
 
-        confetti.style.position = "fixed";
-        confetti.style.left = Math.random() * 100 + "vw";
-        confetti.style.top = "-30px";
-        confetti.style.fontSize = "25px";
-        confetti.style.zIndex = "999";
-        confetti.style.pointerEvents = "none";
+    const duration = 2 + Math.random() * 3;
 
-        const duration = 2 + Math.random() * 3;
+    piece.style.transition =
+      `top ${duration}s linear, transform ${duration}s linear`;
 
-        confetti.style.transition =
-            `top ${duration}s linear, transform ${duration}s linear`;
+    document.body.appendChild(piece);
 
-        document.body.appendChild(confetti);
+    setTimeout(() => {
+      piece.style.top = "110vh";
+      piece.style.transform = `rotate(${Math.random() * 720}deg)`;
+    }, 40);
 
-        setTimeout(() => {
-            confetti.style.top = "110vh";
-            confetti.style.transform =
-                `rotate(${Math.random() * 720}deg)`;
-        }, 50);
-
-        setTimeout(() => {
-            confetti.remove();
-        }, duration * 1000 + 500);
-    }
+    setTimeout(() => piece.remove(), duration * 1000 + 300);
+  }
 }
 
-/* AUTOMATIC PHOTO EFFECT WHILE SCROLLING */
+/* Automatically apply the photo hover effect while scrolling */
 
 const photoObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-        entry.target.classList.toggle(
-            "scroll-active",
-            entry.isIntersecting
-        );
-    });
+  entries.forEach((entry) => {
+    entry.target.classList.toggle(
+      "scroll-active",
+      entry.isIntersecting
+    );
+  });
 }, {
-    threshold: 0.6
+  threshold: 0.35
 });
 
 document.querySelectorAll(".photo").forEach((photo) => {
-    photoObserver.observe(photo);
+  photoObserver.observe(photo);
 });
 </script>
 
